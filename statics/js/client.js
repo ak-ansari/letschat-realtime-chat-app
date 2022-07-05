@@ -28,7 +28,7 @@ socket.on("left", (obj) => {
 
 textarea.addEventListener('keyup',(e)=>{
    if(e.key==='Enter'){
-      console.log(j);
+       
       showdata(e.target.value)
    }
 })
@@ -37,6 +37,7 @@ function showdata(data){
      user: user,
      msg: data,
      data: data.trim(),
+     class:'incoming'
    };
    appendChild(object,'outgoing');
    socket.emit('message',object)

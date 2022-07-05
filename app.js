@@ -1,13 +1,16 @@
 const express = require("express");
+const cors = require('cors')
 const { disconnect } = require("process");
 const app = express();
-const http = require("http").createServer(app);
+app.use(cors());
+const http = require("http");
+const server= http.createServer(app);
 
 const PORT = process.env.PORT || 3000;
 
 let chatters = {};
 
-http.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
@@ -18,7 +21,7 @@ app.get("/", (req, res) => {
 });
 
 // Socket
-const io = require("socket.io")(http);
+const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
   socket.on("join", (user) => {
