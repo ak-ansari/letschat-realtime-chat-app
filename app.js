@@ -2,7 +2,11 @@ const express = require("express");
 const cors = require('cors')
 const { disconnect } = require("process");
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://angular-realtime-chatapp.herokuapp.com/",
+  })
+);
 const http = require("http");
 const server= http.createServer(app);
 
