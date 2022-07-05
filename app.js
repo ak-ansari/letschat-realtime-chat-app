@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 // Socket
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://angular-realtime-chatapp.herokuapp.com/",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
