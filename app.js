@@ -1,12 +1,7 @@
 const express = require("express");
 const cors = require('cors')
-const { disconnect } = require("process");
 const app = express();
-app.use(
-  cors({
-    origin: "https://angular-realtime-chatapp.herokuapp.com/",
-  })
-);
+app.use(cors({ origin: "https://angular-realtime-chatapp.herokuapp.com/" }));
 const http = require("http");
 const server= http.createServer(app);
 
@@ -21,11 +16,17 @@ server.listen(PORT, () => {
 app.use(express.static(__dirname + "/statics"));
 
 app.get("/", (req, res) => {
+  res.add
   res.sendFile(__dirname + "/index.html");
 });
 
 // Socket
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "https://angular-realtime-chatapp.herokuapp.com/",
+    methods: ["GET", "POST"],
+  },
+});
 
 io.on("connection", (socket) => {
   socket.on("join", (user) => {
